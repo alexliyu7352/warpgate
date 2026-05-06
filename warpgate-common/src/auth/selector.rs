@@ -49,3 +49,65 @@ impl Debug for AuthSelector {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn user(s: &str) -> (String, String) {
+        match AuthSelector::from(s) {
+            AuthSelector::User {
+                username,
+                target_name,
+            } => (username, target_name),
+            _ => panic!("expected User selector"),
+        }
+    }
+
+    #[test]
+    fn test_dash_separator() {
+        let (username, target) = user("alice-myserver");
+        assert_eq!(username, "alice");
+        assert_eq!(target, "myserver");
+    }
+
+    #[test]
+    fn test_colon_separator_backward_compat() {
+        let (username, target) = user("alice:myserver");
+        assert_eq!(username, "alice");
+        assert_eq!(target, "myserver");
+    }
+
+    #[test]
+    fn test_hash_separator_backward_compat() {
+        let (username, target) = user("alice#myserver");
+        assert_eq!(username, "alice");
+        assert_eq!(target, "myserver");
+    }
+
+    #[test]
+    fn test_colon_takes_priority_over_dash() {
+        // If both ':' and '-' are present, ':' is used (backward compat)
+        let (username, target) = user("alice-extra:myserver");
+        assert_eq!(username, "alice-extra");
+        assert_eq!(target, "myserver");
+    }
+
+    #[test]
+    fn test_hash_takes_priority_over_colon() {
+        // '#' takes highest priority
+        let (username, target) = user("alice:extra#myserver");
+        assert_eq!(username, "alice:extra");
+        assert_eq!(target, "myserver");
+    }
+
+    #[test]
+    fn test_ticket_selector() {
+        match AuthSelector::from("ticket-mysecret") {
+            AuthSelector::Ticket { secret } => {
+                assert_eq!(secret.expose_secret(), "mysecret")
+            }
+            _ => panic!("expected Ticket selector"),
+        }
+    }
+}
