@@ -85,7 +85,7 @@ class Test:
             processes, shared_wg, wg_c_ed25519_pubkey
         )
         ssh_client = processes.start_ssh_client(
-            f"{user.username}:{ssh_target.name}@localhost",
+            f"{user.username}-{ssh_target.name}@localhost",
             "-p",
             str(shared_wg.ssh_port),
             *common_args,
@@ -111,7 +111,7 @@ class Test:
             processes, shared_wg, wg_c_ed25519_pubkey
         )
         ssh_client = processes.start_ssh_client(
-            f"{user.username}:{ssh_target.name}@localhost",
+            f"{user.username}-{ssh_target.name}@localhost",
             "-p",
             str(shared_wg.ssh_port),
             "-tt",
@@ -136,7 +136,7 @@ class Test:
             processes, shared_wg, wg_c_ed25519_pubkey
         )
         ssh_client = processes.start_ssh_client(
-            f"{user.username}:{ssh_target.name}@localhost",
+            f"{user.username}-{ssh_target.name}@localhost",
             "-p",
             str(shared_wg.ssh_port),
             "-v",
@@ -161,7 +161,7 @@ class Test:
         )
         local_port = alloc_port()
         ssh_client = processes.start_ssh_client(
-            f"{user.username}:{ssh_target.name}@localhost",
+            f"{user.username}-{ssh_target.name}@localhost",
             "-p",
             str(shared_wg.ssh_port),
             "-v",
@@ -195,7 +195,7 @@ class Test:
         )
         fw_port = alloc_port()
         pf_client = processes.start_ssh_client(
-            f"{user.username}:{ssh_target.name}@localhost",
+            f"{user.username}-{ssh_target.name}@localhost",
             "-p",
             str(shared_wg.ssh_port),
             "-v",
@@ -207,7 +207,7 @@ class Test:
         )
         # time.sleep(5)
         ssh_client = processes.start_ssh_client(
-            f"{user.username}:{ssh_target.name}@localhost",
+            f"{user.username}-{ssh_target.name}@localhost",
             "-p",
             str(shared_wg.ssh_port),
             "-v",
@@ -238,7 +238,7 @@ class Test:
             f"""
             set timeout {timeout - 5}
 
-            spawn ssh -tt {user.username}:{ssh_target.name}@localhost -p {shared_wg.ssh_port} -o StrictHostKeychecking=no -o UserKnownHostsFile=/dev/null -o PreferredAuthentications=password
+            spawn ssh -tt {user.username}-{ssh_target.name}@localhost -p {shared_wg.ssh_port} -o StrictHostKeychecking=no -o UserKnownHostsFile=/dev/null -o PreferredAuthentications=password
 
             expect "password:"
             sleep 0.5
@@ -275,11 +275,11 @@ class Test:
             processes, shared_wg, wg_c_ed25519_pubkey
         )
         ssh_client = processes.start_ssh_client(
-            f"{user.username}:{ssh_target.name}@localhost",
+            f"{user.username}-{ssh_target.name}@localhost",
             "-p",
             str(shared_wg.ssh_port),
             "-tt",
-            "user:ssh-bad-domain@localhost",
+            "user-ssh-bad-domain@localhost",
             "-i",
             "/dev/null",
             "-o",
@@ -305,7 +305,7 @@ class Test:
                     "-P",
                     str(shared_wg.ssh_port),
                     "-o",
-                    f"User={user.username}:{ssh_target.name}",
+                    f"User={user.username}-{ssh_target.name}",
                     "-o",
                     "IdentitiesOnly=yes",
                     "-o",
@@ -339,7 +339,7 @@ class Test:
         )
 
         ssh_client = processes.start_ssh_client(
-            f"{user.username}:{ssh_target.name}@localhost",
+            f"{user.username}-{ssh_target.name}@localhost",
             "-p",
             str(shared_wg.ssh_port),
             *common_args,
@@ -360,7 +360,7 @@ class Test:
             ))
 
         ssh_client = processes.start_ssh_client(
-            f"{user.username}:{ssh_target.name}@localhost",
+            f"{user.username}-{ssh_target.name}@localhost",
             "-p",
             str(shared_wg.ssh_port),
             *common_args,

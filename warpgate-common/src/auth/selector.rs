@@ -22,8 +22,10 @@ impl<T: AsRef<str>> From<T> for AuthSelector {
 
         let separator = if selector.as_ref().contains('#') {
             '#'
-        } else {
+        } else if selector.as_ref().contains(':') {
             ':'
+        } else {
+            '-'
         };
 
         let mut parts = selector.as_ref().splitn(2, separator);

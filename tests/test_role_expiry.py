@@ -73,7 +73,7 @@ def try_ssh_command(wg, user, target, command="echo hello"):
             "-p",
             str(wg.ssh_port),
             "-o",
-            f"User={user.username}:{target.name}",
+            f"User={user.username}-{target.name}",
             "-o",
             "IdentitiesOnly=yes",
             "-o",

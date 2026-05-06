@@ -159,7 +159,7 @@ class TestSSHClientAuthConfigE2E:
 
         # Try password auth - should fail
         ssh_client = processes.start_ssh_client(
-            f"{user.username}:{ssh_target.name}@localhost",
+            f"{user.username}-{ssh_target.name}@localhost",
             "-p", str(wg2.ssh_port),
             "-i", "/dev/null",
             "-o", "PreferredAuthentications=password",
@@ -198,7 +198,7 @@ class TestSSHClientAuthConfigE2E:
 
         # Try pubkey auth - should fail
         ssh_client = processes.start_ssh_client(
-            f"{user.username}:{ssh_target.name}@localhost",
+            f"{user.username}-{ssh_target.name}@localhost",
             "-p", str(wg2.ssh_port),
             "-o", "IdentityFile=ssh-keys/id_ed25519",
             "-o", "PreferredAuthentications=publickey",
@@ -235,7 +235,7 @@ class TestSSHClientAuthConfigE2E:
 
         # Try pubkey auth - should succeed
         ssh_client = processes.start_ssh_client(
-            f"{user.username}:{ssh_target.name}@localhost",
+            f"{user.username}-{ssh_target.name}@localhost",
             "-p", str(wg2.ssh_port),
             "-o", "IdentityFile=ssh-keys/id_ed25519",
             "-o", "PreferredAuthentications=publickey",
@@ -273,7 +273,7 @@ class TestSSHClientAuthConfigE2E:
 
         # Try password auth - should succeed
         ssh_client = processes.start_ssh_client(
-            f"{user.username}:{ssh_target.name}@localhost",
+            f"{user.username}-{ssh_target.name}@localhost",
             "-p", str(wg2.ssh_port),
             "-i", "/dev/null",
             "-o", "PreferredAuthentications=password",
@@ -312,7 +312,7 @@ class TestSSHClientAuthConfigE2E:
 
         # Pubkey should work
         ssh_client = processes.start_ssh_client(
-            f"{user.username}:{ssh_target.name}@localhost",
+            f"{user.username}-{ssh_target.name}@localhost",
             "-p", str(wg2.ssh_port),
             "-o", "IdentityFile=ssh-keys/id_ed25519",
             "-o", "PreferredAuthentications=publickey",
@@ -324,7 +324,7 @@ class TestSSHClientAuthConfigE2E:
 
         # Password should also work
         ssh_client = processes.start_ssh_client(
-            f"{user.username}:{ssh_target.name}@localhost",
+            f"{user.username}-{ssh_target.name}@localhost",
             "-p", str(wg2.ssh_port),
             "-i", "/dev/null",
             "-o", "PreferredAuthentications=password",
