@@ -55,7 +55,7 @@ class Test:
             api.add_target_role(ssh_target.id, role.id)
 
         ssh_client = processes.start_ssh_client(
-            f"{user.username}:{ssh_target.name}@localhost",
+            f"{user.username}-{ssh_target.name}@localhost",
             "-p",
             str(shared_wg.ssh_port),
             "-o",
@@ -70,7 +70,7 @@ class Test:
         assert ssh_client.returncode == 0
 
         ssh_client = processes.start_ssh_client(
-            f"{user.username}:{ssh_target.name}@localhost",
+            f"{user.username}-{ssh_target.name}@localhost",
             "-p",
             str(shared_wg.ssh_port),
             "-o",
@@ -127,7 +127,7 @@ class Test:
             api.add_target_role(ssh_target.id, role.id)
 
         ssh_client = processes.start_ssh_client(
-            f"{user.username}:{ssh_target.name}@localhost",
+            f"{user.username}-{ssh_target.name}@localhost",
             "-v",
             "-p",
             str(shared_wg.ssh_port),
@@ -144,7 +144,7 @@ class Test:
         assert ssh_client.returncode == 0
 
         ssh_client = processes.start_ssh_client(
-            f"{user.username}:{ssh_target.name}@localhost",
+            f"{user.username}-{ssh_target.name}@localhost",
             "-p",
             str(shared_wg.ssh_port),
             "-o",

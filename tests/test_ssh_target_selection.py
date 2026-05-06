@@ -46,7 +46,7 @@ class Test:
 
         ssh_client = processes.start_ssh_client(
             "-t",
-            f"{user.username}:badtarget@localhost",
+            f"{user.username}-badtarget@localhost",
             "-p",
             str(shared_wg.ssh_port),
             "-i",

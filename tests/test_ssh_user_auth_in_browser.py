@@ -94,7 +94,7 @@ class Test:
         ws = await session.ws_connect(url.replace('https:', 'wss:') + '/@warpgate/api/auth/web-auth-requests/stream', ssl=False)
 
         ssh_client = processes.start_ssh_client(
-            f"{user.username}:{ssh_target.name}@localhost",
+            f"{user.username}-{ssh_target.name}@localhost",
             "-p",
             str(shared_wg.ssh_port),
             "-o",
